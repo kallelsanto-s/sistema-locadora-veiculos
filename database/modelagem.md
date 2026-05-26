@@ -1,53 +1,50 @@
-# Modelagem do Banco de Dados
+# 🗄️ Modelagem do Banco de Dados (PostgreSQL)
 
-## Tabela: usuarios
-
-| Campo | Tipo | Descrição |
-|---|---|---|
-| id | SERIAL | Identificador do usuário |
-| nome | VARCHAR(100) | Nome do usuário |
-| email | VARCHAR(100) | E-mail do usuário |
-| senha | VARCHAR(255) | Senha criptografada |
-| tipo_usuario | VARCHAR(20) | Tipo do usuário |
+Este documento descreve a estrutura de tabelas, colunas, tipos de dados e os relacionamentos do banco de dados do Sistema de Locadora de Veículos.
 
 ---
 
-## Tabela: clientes
+## 📊 Diagrama Entidade-Relacionamento (ER)
 
-| Campo | Tipo | Descrição |
-|---|---|---|
-| id | SERIAL | Identificador do cliente |
-| nome | VARCHAR(100) | Nome completo |
-| cpf | VARCHAR(14) | CPF do cliente |
-| telefone | VARCHAR(20) | Telefone |
-| email | VARCHAR(100) | E-mail |
-| cnh | VARCHAR(20) | Número da CNH |
+O gráfico abaixo mostra graficamente como as tabelas se relacionam através das chaves primárias (PK) e estrangeiras (FK). O GitHub renderiza este desenho de forma automática:
 
----
+```mermaid
+erDiagram
+    usuarios {
+        int id PK
+        string nome
+        string email UK
+        string senha
+    }
 
-## Tabela: veiculos
+    clientes {
+        int id PK
+        string nome
+        string cpf UK
+        string telefone
+        string email
+    }
 
-| Campo | Tipo | Descrição |
-|---|---|---|
-| id | SERIAL | Identificador do veículo |
-| marca | VARCHAR(50) | Marca do veículo |
-| modelo | VARCHAR(50) | Modelo do veículo |
-| ano | INT | Ano do veículo |
-| placa | VARCHAR(10) | Placa |
-| categoria | VARCHAR(30) | Categoria |
-| valor_diaria | DECIMAL(10,2) | Valor da diária |
-| status | VARCHAR(20) | Disponibilidade |
+    veiculos {
+        int id PK
+        string marca
+        string modelo
+        string placa UK
+        string categoria
+        numeric valor_diaria
+        string status
+    }
 
----
+    locacoes {
+        int id PK
+        int cliente_id FK
+        int veiculo_id FK
+        date data_retirada
+        date data_devolucao
+        numeric valor_total
+    }
 
-## Tabela: locacoes
+    clientes ||--o{ locacoes : "possui"
+    veiculos ||--o{ locacoes : "recebe"
 
-| Campo | Tipo | Descrição |
-|---|---|---|
-| id | SERIAL | Identificador da locação |
-| cliente_id | INT | Cliente responsável |
-| veiculo_id | INT | Veículo alugado |
-| data_retirada | DATE | Data retirada |
-| data_devolucao | DATE | Data devolução |
-| valor_total | DECIMAL(10,2) | Valor total |
-| status | VARCHAR(20) | Status da locação |
+
