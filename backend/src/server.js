@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
-const PORT = 3000;
+require('./config/database'); // 👈 ADICIONE ESTA LINHA EXATAMENTE AQUI!
+
+const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
