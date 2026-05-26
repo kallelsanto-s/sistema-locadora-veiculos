@@ -55,3 +55,12 @@ Para a especificação técnica do projeto, as funcionalidades acima foram mapea
 | **RF04** | CRUD de Veículos | O sistema deve permitir cadastrar, ler, atualizar e deletar veículos. |
 | **RF05** | Controle de Status | O sistema deve alterar o status do veículo automaticamente para "Alugado" ao confirmar uma locação. |
 | **RF06** | Registro de Contrato | O sistema deve registrar a data de retirada, data de devolução e calcular o valor final da locação. |
+
+## 🔒 Requisitos Não-Funcionais (RNF)
+
+| ID | Requisito Não-Funcional | Descrição |
+| :--- | :--- | :--- |
+| **RNF01** | **Persistência de Dados** | O sistema deve utilizar o SGDB PostgreSQL para o armazenamento e consistência dos dados. |
+| **RNF02** | **Segurança** | As senhas dos usuários devem ser armazenadas no banco de dados utilizando criptografia/hash (não salvar em texto limpo). |
+| **RNF03** | **Interface** | O frontend deve ser responsivo e intuitivo, facilitando a operação por parte do usuário administrador. |
+| **RNF04** | **Arquitetura** | O sistema deve seguir o modelo cliente-servidor, separando totalmente a interface (Frontend) das regras de negócio (Backend). |
