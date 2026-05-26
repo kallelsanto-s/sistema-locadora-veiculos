@@ -3,7 +3,7 @@
 -- ====================================================================
 
 -- 1. CONSULTAS DO DASHBOARD
--- Busca exatamente as métricas que você planejou para a tela principal
+
 SELECT 
     (SELECT COUNT(*) FROM veiculos) AS total_veiculos,
     (SELECT COUNT(*) FROM veiculos WHERE status = 'Disponivel') AS veiculos_disponiveis,
@@ -11,8 +11,7 @@ SELECT
 
 
 -- 2. LISTAGEM DE LOCAÇÕES DETALHADA (INNER JOIN)
--- Junta as tabelas para mostrar o nome do cliente e o carro em vez de apenas IDs.
--- Isso é ótimo para testar se os relacionamentos (FKs) estão funcionando!
+
 SELECT 
     l.id AS codigo_locacao,
     c.nome AS nome_cliente,
@@ -28,7 +27,7 @@ JOIN veiculos v ON l.veiculo_id = v.id;
 
 
 -- 3. FILTRO DE VEÍCULOS DISPONÍVEIS
--- Consulta que o Frontend vai usar para listar apenas carros que podem ser alugados
+
 SELECT marca, modelo, placa, valor_diaria 
 FROM veiculos 
 WHERE status = 'Disponivel'
