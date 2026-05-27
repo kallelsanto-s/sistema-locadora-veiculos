@@ -1,15 +1,25 @@
 const express = require('express');
+const cors = require('cors');
+require('dotenv').config();
+
 const app = express();
-require('./config/database'); // 👈 ADICIONE ESTA LINHA EXATAMENTE AQUI!
+const port = process.env.PORT || 3000;
 
-const PORT = process.env.PORT || 3000;
-
+// Middleware
+app.use(cors());
 app.use(express.json());
 
+// 🚀 IMPORTAR AS ROTAS DE VEÍCULOS
+const veiculosRoutes = require('./routes/veiculosRoutes');
+
+// 🔌 USAR AS ROTAS NO SERVIDOR
+app.use('/api', veiculosRoutes);
+
+// Rota de teste inicial (pode manter se já existia)
 app.get('/', (req, res) => {
-    res.json({ mensagem: "Backend da Locadora rodando com sucesso!" });
+    res.send('Servidor da Locadora rodando com sucesso!');
 });
 
-app.listen(PORT, () => {
-    console.log(`🚀 Servidor rodando na porta http://localhost:${PORT}`);
+app.listen(port, () => {
+    console.log(`Servidor rodando na porta ${port}`);
 });
